@@ -1,3 +1,3 @@
 # js-physics-solver
 
-Built in React 
+Built with React 
