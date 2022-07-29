@@ -105,36 +105,13 @@ export function collision(p1, p2){
     if(distance < thresh){
       //Elastic Collision Simulation
       let denom = p1.mass + p2.mass
-      //Compute Angles
-      let alpha1 = Math.atan2(p2.pos.y - p1.pos.y, p2.pos.x - p1.pos.x) 
-      let beta1 = Math.atan2(p1.pos.y, p1.posx) 
-      let gamma1 = beta1 - alpha1
-
-      let alpha2 = Math.atan2(p1.pos.y - p2.pos.y, p1.pos.x - p2.pos.x) 
-      let beta2 = Math.atan2(p2.pos.y, p2.pos.x) 
-      let gamma2 = beta2 - alpha2
-
-      //Vector Normals pre-collision (u12 = the norm of collision from body 1 to body 2)
-      let p1_mag = magnitude(p1.pos.x, p1.pos.y);
-      let p2_mag = magnitude(p2.pos.x, p2.pos.y);
-      let u12 = p1_mag * Math.cos(gamma1);
-      let u11 = p1_mag * Math.sin(gamma1);
-      let u21 = p2_mag * Math.sin(gamma2);
-      let u22 = p2_mag * Math.cos(gamma2);
-
-      //Vector Normals of velocity sub vectors
-      let v12 = ((mass_diff*u12)-(2*p2.mass*u21)) / thresh
-      let v21 = ((mass_diff*u21)+(2*p1.mass*u12)) / thresh
-
-      //Compute Velocity components for body 1
-      p1.vel.x = u11*-Math.sin(alpha1) + v12 * Math.cos(alpha1)
-      p1.vel.y = u11*Math.cos(alpha1) + v12 * Math.sin(alpha1)
-     
-      //Compute Velocity components for body 2
-      p2.vel.x = u22*-Math.sin(alpha1) - v12 * Math.cos(alpha1)
-      p2.vel.y = u22*Math.cos(alpha1) - v21 * Math.sin(alpha1)
-    }
+      
+      p1.vel.x = p1.vel.x - (((2*p2.mass)/denom)*(p1.vel.x - p2.vel.x)*())
 }
 export function magnitude(x, y){
       return Math.sqrt(Math.pow(x , 2) + Math.pow(y, 2))
     }
+
+export function modify(p1){
+  p1.pos.x = 144
+}
